@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% block container %}
+<div class="row">
+    <div class="col-sm-6 offset-sm-3 d-flex justify-content-center">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Ana Sayfa</a></li>
+                <li class="breadcrumb-item"><a href="{{ todo.category.get_absolute_url }}">{{ todo.category.title }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{ todo.title }}</li>
+            </ol>
+        </nav>
+    </div>
+    <hr>
+    <div class="col-sm-6 offset-sm-3 d-flex justify-content-center">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title mb-5">{{ todo.title }}</h1>
+                <h4 class="card-subtitle mb-2 text-muted">{{ todo.category }}</h4>
+                <p class="card-text my-3">{{ todo.content }}</p>
+                <h6 class="card-title mt-2 text-muted">{{todo.created_at | date:"d/m/Y H:s"}}</h6>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="col-sm-12 my-3 d-inline-flex justify-content-center">
+        <ul class="list-inline">
+            {% for tag in todo.tag.all %}
+            <li class="list-inline-item">
+                <a href="{{ tag.get_absolute_url }}">
+                    <span class="badge text-bg-primary px-2">{{ tag }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-sm-12 d-flex justify-content-center">
+        <a href="/" class="btn btn-primary mt-5">Ana Sayfa</a>
+    </div>
+    {% endblock container %}
